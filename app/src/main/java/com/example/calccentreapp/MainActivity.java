@@ -90,4 +90,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ConverterActivity.class);
         startActivity(intent);
     }
+    public void launchTempConverter(MenuItem item) {
+        Intent intent = new Intent(this, TempConverterActivity.class);
+        startActivity(intent);
+    }
 }

@@ -5,11 +5,13 @@
         app:title="@string/name_title"
         app:useSimpleSummaryProvider="true" />
 
+    <PreferenceCategory android:title="In the future">
     <SwitchPreferenceCompat
         android:id="@+id/swt_selectMode"
         app:key="colorMode"
         app:summaryOff="@string/colorMode_summary_off"
         app:summaryOn="@string/colorMode_summary_on"
         app:title="@string/attachment_title" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

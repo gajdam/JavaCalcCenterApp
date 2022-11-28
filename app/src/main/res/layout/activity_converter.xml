@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConverterActivity">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="310dp">
+
+        <RadioButton
+            android:id="@+id/mili"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:onClick="checkButton"
+            android:textStyle="bold"
+            android:text="Milimetry"/>
+
+        <RadioButton
+            android:id="@+id/centy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="checkButton"
+            android:text="Centymetry"/>
+
+        <RadioButton
+            android:id="@+id/metry"
+            android:layout_width="122dp"
+            android:layout_height="wrap_content"
+            android:onClick="checkButton"
+            android:text="Metry"/>
+
+        <RadioButton
+            android:id="@+id/kilome"
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:text="Kilometry"/>
+
+        <RadioButton
+            android:id="@+id/cale"
+            android:layout_width="113dp"
+            android:layout_height="wrap_content"
+            android:text="Cale"/>
+
+        <RadioButton
+            android:id="@+id/stoopki"
+            android:layout_width="107dp"
+            android:layout_height="wrap_content"
+            android:text="Stopy"/>
+
+        <RadioButton
+            android:id="@+id/jardy"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:text="Jardy"/>
+
+        <RadioButton
+            android:id="@+id/mile"
+            android:layout_width="127dp"
+            android:layout_height="wrap_content"
+            android:text="Mile"/>
+
+        <RadioButton
+            android:id="@+id/radioButton7"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:text="RadioButton"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/text_view_selected"
+        android:layout_width="379dp"
+        android:layout_height="426dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="151dp"
+        android:layout_marginEnd="32dp"
+        android:textSize="20sp"
+        tools:text="Your selection: " />
+
+    <Button
+        android:id="@+id/button_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/text_view_selected"
+        android:layout_alignEnd="@+id/radioGroup"
+        android:layout_marginTop="-80dp"
+        android:layout_marginEnd="155dp"
+        android:text="apply" />
+
+    <EditText
+        android:id="@+id/liczba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button_apply"
+        android:layout_alignBottom="@+id/button_apply"
+        android:layout_marginEnd="-61dp"
+        android:layout_marginBottom="57dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+</RelativeLayout>

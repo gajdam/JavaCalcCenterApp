@@ -45,17 +45,17 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home: {
-                        Toast.makeText(MainActivity.this, "Home Selected", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, " in progress ", Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.calc:
                     {
-                        Toast.makeText(MainActivity.this,"calculator Selected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"in progress ",Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.acc:
                     {
-                        Toast.makeText(MainActivity.this,"Profile Selected",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"in progress",Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.settings:
@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchSettings(MenuItem item) {
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+    public void launchConverter(MenuItem item) {
+        Intent intent = new Intent(this, ConverterActivity.class);
         startActivity(intent);
     }
 }

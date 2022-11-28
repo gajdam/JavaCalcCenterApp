@@ -5,7 +5,6 @@
             android:id="@+id/acc"
             android:icon="@drawable/ic_baseline_account_circle_24"
             android:title="Profile" />
-        />
         <item
             android:id="@+id/home"
             android:icon="@drawable/ic_baseline_home_24"
@@ -14,6 +13,16 @@
             android:id="@+id/calc"
             android:icon="@drawable/ic_baseline_calculate_24"
             android:title="Calculator" />
+        <item
+            android:id="@+id/unit_converter"
+            android:icon="@drawable/ic_baseline_architecture_24"
+            android:onClick="launchConverter"
+            android:title="Converter"/>
+        <item
+            android:id="@+id/temp_converter"
+            android:icon="@drawable/ic_baseline_architecture_24"
+            android:onClick="launchConverter"
+            android:title="Converter"/>
         <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_baseline_settings_24"

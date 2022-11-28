@@ -1,0 +1,15 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference
+        app:key="user_name"
+        app:title="@string/name_title"
+        app:useSimpleSummaryProvider="true" />
+
+    <SwitchPreferenceCompat
+        android:id="@+id/swt_selectMode"
+        app:key="colorMode"
+        app:summaryOff="@string/colorMode_summary_off"
+        app:summaryOn="@string/colorMode_summary_on"
+        app:title="@string/attachment_title" />
+
+</PreferenceScreen>

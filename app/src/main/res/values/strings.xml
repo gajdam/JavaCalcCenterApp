@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">CalcCenterApp</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Name Preferences -->
+    <string name="name_title">Your name</string>
+
+
+    <!-- Sync Preferences -->
+    <string name="attachment_title">Select mode</string>
+    <string name="settings">Settings</string>
+    <string name="colorMode_summary_off">Light Mode</string>
+    <string name="colorMode_summary_on">Dark Mode</string>
+</resources>

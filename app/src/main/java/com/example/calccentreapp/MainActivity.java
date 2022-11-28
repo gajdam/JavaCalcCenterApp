@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case R.id.calc:
                     {
-                        Toast.makeText(MainActivity.this,"in progress ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Calculator Selected ",Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case R.id.acc:
@@ -92,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void launchTempConverter(MenuItem item) {
         Intent intent = new Intent(this, TempConverterActivity.class);
+        startActivity(intent);
+    }
+    public void launchCalculator(MenuItem item) {
+        Intent intent = new Intent(this, CalculatorActivity.class);
         startActivity(intent);
     }
 }

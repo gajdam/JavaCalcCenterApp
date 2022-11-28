@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/acc"
+            android:icon="@drawable/ic_baseline_account_circle_24"
+            android:title="Profile" />
+        />
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="Home" />
+        <item
+            android:id="@+id/calc"
+            android:icon="@drawable/ic_baseline_calculate_24"
+            android:title="Calculator" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:onClick="launchSettings"
+            android:title="Setting" />
+    </group>
+</menu>

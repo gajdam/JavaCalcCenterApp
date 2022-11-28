@@ -2,6 +2,10 @@
     <string name="app_name">CalcCenterApp</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
+    <!--    Navigation-->
+    <string name="open">Open Navigation Drawer</string>
+    <string name="close">Close Navigation Drawer</string>
+    
     <!-- Name Preferences -->
     <string name="name_title">Your name</string>
 

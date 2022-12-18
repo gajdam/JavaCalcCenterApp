@@ -16,7 +16,8 @@
         <activity
             android:name=".CalculatorActivity"
             android:exported="false"
-            android:label="@string/title_activity_calculator">
+            android:label="@string/title_activity_calculator"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -24,15 +25,18 @@
         <activity
             android:name=".TempConverterActivity"
             android:exported="false"
-            android:label="@string/title_activity_tempconverter"/>
+            android:label="@string/title_activity_tempconverter"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".ConverterActivity"
             android:exported="false"
-            android:label="@string/title_activity_converter"/>
+            android:label="@string/title_activity_converter"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
-            android:label="@string/title_activity_settings" />
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

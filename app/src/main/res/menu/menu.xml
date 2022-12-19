@@ -20,6 +20,11 @@
             android:onClick="launchConverter"
             android:title="Converter"/>
         <item
+            android:id="@+id/romanConverter"
+            android:icon="@drawable/ic_baseline_architecture_24"
+            android:onClick="launchRoman"
+            android:title="romanConverter"/>
+        <item
             android:id="@+id/temp_converter"
             android:icon="@drawable/ic_baseline_architecture_24"
             android:onClick="launchTempConverter"

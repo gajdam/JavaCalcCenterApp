@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
+    public void launchRoman(MenuItem item) {
+        Intent intent = new Intent(this, FromToRomanActivity.class);
+        startActivity(intent);
+    }
     public void launchConverter(MenuItem item) {
         Intent intent = new Intent(this, ConverterActivity.class);
         startActivity(intent);

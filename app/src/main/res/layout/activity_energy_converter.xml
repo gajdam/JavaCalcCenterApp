@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8BC34A"
-    tools:context=".ConverterActivity">
+    android:background="#A487DC"
+    tools:context=".EnergyConverter">
     <View
         android:id="@+id/view3"
         android:layout_width="379dp"
@@ -70,7 +70,7 @@
         android:layout_marginStart="366dp"
         android:layout_marginEnd="211dp"
         android:gravity="center"
-        android:text="Converter"
+        android:text="Energy Converter"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

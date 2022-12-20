@@ -26,14 +26,9 @@
             android:title="romanConverter"/>
         <item
             android:id="@+id/temp_converter"
-            android:icon="@drawable/ic_baseline_architecture_24"
+            android:icon="@drawable/ic_thermostat"
             android:onClick="launchTempConverter"
             android:title="TempConverter"/>
-        <item
-            android:id="@+id/numeric_systems"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:onClick="launchNumericSystems"
-            android:title="Numeric Systems" />
         <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_baseline_settings_24"

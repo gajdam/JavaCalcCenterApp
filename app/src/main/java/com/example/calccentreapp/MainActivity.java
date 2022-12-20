@@ -98,4 +98,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CalculatorActivity.class);
         startActivity(intent);
     }
+    public void launchEnergyConverter(MenuItem item) {
+        Intent intent = new Intent(this, EnergyConverter.class);
+        startActivity(intent);
+    }
 }

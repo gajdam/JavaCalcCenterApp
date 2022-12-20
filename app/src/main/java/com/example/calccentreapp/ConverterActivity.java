@@ -6,139 +6,170 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class ConverterActivity extends AppCompatActivity {
 
-    RadioGroup radioGroup;
-    RadioButton radioButton;
+    String[] FArNames = {"Milimetry","Centymetry","Metry","Kilometry","Cale","Stopy","Jardy","Mile"};
+    String From, To;
     TextView textView;
+    Button Converter_button;
+    android.widget.EditText EditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_converter);
 
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        radioGroup = findViewById(R.id.radioGroup);
-        textView = findViewById(R.id.text_view_selected);
-        Button buttonApply = findViewById(R.id.button_apply);
-        buttonApply.setOnClickListener(new View.OnClickListener()
-        {
-            @SuppressLint("SetTextI18n")
+        EditText = findViewById(R.id.EditText);
+        textView = findViewById(R.id.textView);
+        Converter_button = findViewById(R.id.Converter_button);
+        Spinner numberspinner = (Spinner) findViewById(R.id.From);
+        Spinner numberspinner2 = (Spinner) findViewById(R.id.To);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, FArNames);
+        numberspinner.setAdapter(adapter);
+        numberspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v)
-            {
-                int radioId = radioGroup.getCheckedRadioButtonId();
-                radioButton = findViewById(radioId);
-                TextView wyniki=(TextView)findViewById(R.id.liczba);
-                double wynikiDouble=Double.parseDouble(String.valueOf(wyniki.getText()));
-                BigDecimal mili;
-                BigDecimal centy;
-                BigDecimal metr;
-                BigDecimal kilo;
-                BigDecimal cale;
-                BigDecimal stopy;
-                BigDecimal jardy;
-                BigDecimal mile;
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(ConverterActivity.this, "Connvert From " + adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                From = adapterView.getSelectedItem().toString();
+            }
 
-                if (radioId==R.id.mili)  //milimetry
-                {
-                    mili= BigDecimal.valueOf(wynikiDouble);
-                    centy=BigDecimal.valueOf(wynikiDouble*0.1d);
-                    metr=BigDecimal.valueOf(wynikiDouble*0.001d);
-                    kilo=BigDecimal.valueOf(wynikiDouble*0.000001d);
-                    cale=BigDecimal.valueOf(wynikiDouble*0.0393700787d);
-                    stopy=BigDecimal.valueOf(wynikiDouble*0.0032808399d);
-                    jardy=BigDecimal.valueOf(wynikiDouble*0.0010936133d);
-                    mile=BigDecimal.valueOf(wynikiDouble*0.000621371192d*0.001d);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, FArNames);
+        numberspinner2.setAdapter(adapter);
+        numberspinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(ConverterActivity.this, "Convert To " + adapterView.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                To = adapterView.getSelectedItem().toString();
+            }
 
-                    textView.setText("Milimetry: "+mili.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nCentrymetry: "+centy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nMetry: "+metr.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKilometry: "+kilo.setScale(8, RoundingMode.HALF_UP)+
-                            "\nCale: "+cale.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopy: "+stopy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nJardy: "+jardy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nMile: "+mile.setScale(8, RoundingMode.HALF_UP));
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        Converter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cyfra_podana = EditText.getText().toString();
+                Double cyfra_wyjscie = Double.parseDouble(cyfra_podana);
+
+                if (From.equals("Milimetry") && To.equals("Milimetry")) {
+                    double result =cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Milimetry") && To.equals("Centymetry")) {
+                    double result = cyfra_wyjscie*0.1d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Milimetry") && To.equals("Metry")) {
+                    double result = cyfra_wyjscie*0.001d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Milimetry") && To.equals("Kilometry")) {
+                    double result = cyfra_wyjscie *0.000001d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Milimetry") && To.equals("Cale")) {
+                    double result = cyfra_wyjscie*0.0393700787d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Milimetry") && To.equals("Stopy")) {
+                    double result = cyfra_wyjscie*0.0032808399d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Milimetry") && To.equals("Jardy")) {
+                    double result = cyfra_wyjscie *0.0010936133d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Milimetry") && To.equals("Mile")) {
+                    double result = cyfra_wyjscie * 0.000621371192d * 0.001d;
+                    textView.setText("Result " + result);
+                    ////
                 }
-                else if (radioId==R.id.centy) //centymetry
-                {
-                    mili=BigDecimal.valueOf(wynikiDouble*10d);
-                    centy=BigDecimal.valueOf(wynikiDouble);
-                    metr=BigDecimal.valueOf(wynikiDouble*0.01d);
-                    kilo=BigDecimal.valueOf(wynikiDouble*0.00001d);
-                    cale=BigDecimal.valueOf(wynikiDouble*0.393700787d);
-                    stopy=BigDecimal.valueOf(wynikiDouble*0.032808399d);
-                    jardy=BigDecimal.valueOf(wynikiDouble*0.010936133d);
-                    mile=BigDecimal.valueOf(wynikiDouble*0.000621371192d*0.01d);
-
-                    textView.setText("Milimetry: "+mili.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nCentrymetry: "+centy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nMetry: "+metr.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKilometry: "+kilo.setScale(8, RoundingMode.HALF_UP)+
-                            "\nCale: "+cale.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopy: "+stopy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nJardy: "+jardy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nMile: "+mile.setScale(8, RoundingMode.HALF_UP));
+                if (From.equals("Centymetry") && To.equals("Milimetry")) {
+                    double result =cyfra_wyjscie*10d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Centymetry") && To.equals("Centymetry")) {
+                    double result = cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Centymetry") && To.equals("Metry")) {
+                    double result = cyfra_wyjscie*0.01d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Centymetry") && To.equals("Kilometry")) {
+                    double result = cyfra_wyjscie *0.00001d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Centymetry") && To.equals("Cale")) {
+                    double result = cyfra_wyjscie*0.393700787d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Centymetry") && To.equals("Stopy")) {
+                    double result = cyfra_wyjscie*0.032808399d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Centymetry") && To.equals("Jardy")) {
+                    double result = cyfra_wyjscie*0.010936133d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Centymetry") && To.equals("Mile")) {
+                    double result = cyfra_wyjscie * 0.000621371192d * 0.01d;
+                    textView.setText("Result " + result);
                 }
-                else if (radioId==R.id.metry)
-                {
-                    mili=BigDecimal.valueOf(wynikiDouble*1000d);
-                    centy=BigDecimal.valueOf(wynikiDouble*100);
-                    metr=BigDecimal.valueOf(wynikiDouble);
-                    kilo=BigDecimal.valueOf(wynikiDouble*0.001d);
-                    cale=BigDecimal.valueOf(wynikiDouble*39.3700787d);
-                    stopy=BigDecimal.valueOf(wynikiDouble*3.2808399d);
-                    jardy=BigDecimal.valueOf(wynikiDouble*1.0936133d);
-                    mile=BigDecimal.valueOf(wynikiDouble*0.000621371192d);
-
-                    textView.setText("Milimetry: "+mili.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nCentrymetry: "+centy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nMetry: "+metr.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKilometry: "+kilo.setScale(3, RoundingMode.HALF_UP)+
-                            "\nCale: "+cale.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopy: "+stopy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nJardy: "+jardy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nMile: "+mile.setScale(8, RoundingMode.HALF_UP));
+                if (From.equals("Metry") && To.equals("Milimetry")) {
+                    double result =cyfra_wyjscie*1000d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Metry") && To.equals("Centymetry")) {
+                    double result = cyfra_wyjscie*100;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Metry") && To.equals("Metry")) {
+                    double result = cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Metry") && To.equals("Kilometry")) {
+                    double result = cyfra_wyjscie *0.001d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Metry") && To.equals("Cale")) {
+                    double result = cyfra_wyjscie*39.3700787d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Metry") && To.equals("Stopy")) {
+                    double result = cyfra_wyjscie*3.2808399d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Metry") && To.equals("Jardy")) {
+                    double result = cyfra_wyjscie*1.0936133d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Metry") && To.equals("Mile")) {
+                    double result = cyfra_wyjscie *0.000621371192d;
+                    textView.setText("Result " + result);
                 }
-                else if (radioId==R.id.kilome)
-                {
-                    mili=BigDecimal.valueOf(wynikiDouble*1000000d);
-                    centy=BigDecimal.valueOf(wynikiDouble*100000d);
-                    metr=BigDecimal.valueOf(wynikiDouble*1000d);
-                    kilo=BigDecimal.valueOf(wynikiDouble);
-                    cale=BigDecimal.valueOf(wynikiDouble*39370.0787d);
-                    stopy=BigDecimal.valueOf(wynikiDouble*3280.8399d);
-                    jardy=BigDecimal.valueOf(wynikiDouble*1093.6133d);
-                    mile=BigDecimal.valueOf(wynikiDouble*0.621371192d);
-
-                    textView.setText("Milimetry: "+mili.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nCentrymetry: "+centy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nMetry: "+metr.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKilometry: "+kilo.setScale(2, RoundingMode.HALF_UP)+
-                            "\nCale: "+cale.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopy: "+stopy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nJardy: "+jardy.setScale(3, RoundingMode.HALF_UP)+
-                            "\nMile: "+mile.setScale(8, RoundingMode.HALF_UP));
+                if (From.equals("Kilometry") && To.equals("Milimetry")) {
+                    double result =cyfra_wyjscie*1000000d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Kilometry") && To.equals("Centymetry")) {
+                    double result = cyfra_wyjscie*100000d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Kilometry") && To.equals("Metry")) {
+                    double result = cyfra_wyjscie*1000d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Kilometry") && To.equals("Kilometry")) {
+                    double result = cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Kilometry") && To.equals("Cale")) {
+                    double result = cyfra_wyjscie*39370.0787d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Kilometry") && To.equals("Stopy")) {
+                    double result = cyfra_wyjscie*3280.8399d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Kilometry") && To.equals("Jardy")) {
+                    double result = cyfra_wyjscie*1093.6133d;
+                    textView.setText("Result " + result);
+                } else if (From.equals("Kilometry") && To.equals("Mile")) {
+                    double result = cyfra_wyjscie * 0.621371192d;
+                    textView.setText("Result " + result);
                 }
             }
         });
-    }
-
-    public void checkButton(View v)
-    {
-        int radioId = radioGroup.getCheckedRadioButtonId();
-        radioButton = findViewById(radioId);
     }
 }

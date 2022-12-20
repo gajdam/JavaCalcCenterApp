@@ -6,219 +6,407 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class TempConverterActivity extends AppCompatActivity {
 
-    RadioGroup radioGroup;
-    RadioButton radioButton;
+
+    String[] TempNames={"Celsjusz","Farenheit","Kelwin","Delisle","Réaumur","Rankine","Romer","Newton"};
+    String From,To;
     TextView textView;
+    Button Converter_button;
+    android.widget.EditText EditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temp_converter);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
-        radioGroup = findViewById(R.id.radioGroup);
-        textView = findViewById(R.id.text_view_selected);
-
-        Button buttonApply = findViewById(R.id.button_apply);
-        buttonApply.setOnClickListener(new View.OnClickListener()
-        {
-            @SuppressLint("SetTextI18n")
+        EditText=findViewById(R.id.EditText);
+        textView=findViewById(R.id.textView);
+        Converter_button=findViewById(R.id.Converter_button);
+        Spinner numberspinner =(Spinner)findViewById(R.id.From);
+        Spinner numberspinner2=(Spinner)findViewById(R.id.To);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,TempNames);
+        numberspinner.setAdapter(adapter);
+        numberspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v)
-            {
-                int radioId = radioGroup.getCheckedRadioButtonId();
-                radioButton = findViewById(radioId);
-                TextView wyniki=(TextView)findViewById(R.id.liczba);
-                double wynikiDouble=Double.parseDouble(String.valueOf(wyniki.getText()));
-                BigDecimal cel;
-                BigDecimal faren;
-                BigDecimal kel;
-                BigDecimal del;
-                BigDecimal rea;
-                BigDecimal ran;
-                BigDecimal rom;
-                BigDecimal newton;
-
-                if (radioId==R.id.cel)  //celsjusze
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(TempConverterActivity.this,"Connvert From "+adapterView.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+                From= adapterView.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,TempNames);
+        numberspinner2.setAdapter(adapter);
+        numberspinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(TempConverterActivity.this,"Convert To "+adapterView.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+                To= adapterView.getSelectedItem().toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        Converter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String cyfra_podana= EditText.getText().toString();
+                Double cyfra_wyjscie=Double.parseDouble(cyfra_podana);
+                if(From.equals("Celsjusz")&&To.equals("Celsjusz"))
                 {
-                    cel=BigDecimal.valueOf(wynikiDouble);
-                    faren=BigDecimal.valueOf(32+9/5d*wynikiDouble);
-                    kel=BigDecimal.valueOf(wynikiDouble+273.15);
-                    del=BigDecimal.valueOf(150d-wynikiDouble*1.5d);
-                    rea=BigDecimal.valueOf(wynikiDouble*0.8d);
-                    ran=BigDecimal.valueOf(wynikiDouble*1.8+491.67);
-                    rom=BigDecimal.valueOf(wynikiDouble*21d/40d+7.5);
-                    newton=BigDecimal.valueOf(wynikiDouble*0.33d);
-
-                    textView.setText("Stopnie Celsjusza: "+cel.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nStopnie Farenheita: "+faren.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKelwiny: "+kel.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Delisle'a: "+del.setScale(2, RoundingMode.HALF_UP)+
-                            "\nStopnie Réaumura: "+rea.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Rankine'a: "+ran.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Romera: "+rom.setScale(3, RoundingMode.HALF_UP)+
-                            "\nNewtony: "+newton.setScale(8, RoundingMode.HALF_UP));
+                    double result=cyfra_wyjscie;
+                    textView.setText("Result "+result);
                 }
-                else if (radioId==R.id.faren) //
+                else if(From.equals("Celsjusz")&&To.equals("Farenheit"))
                 {
-                    cel=BigDecimal.valueOf(5/9d*(wynikiDouble-32));
-                    faren=BigDecimal.valueOf(wynikiDouble);
-                    kel=BigDecimal.valueOf((wynikiDouble+459.67)*5/9);
-                    del=BigDecimal.valueOf((212-wynikiDouble)*5/6);
-                    rea=BigDecimal.valueOf((wynikiDouble-32)*0.44444);
-                    ran=BigDecimal.valueOf(wynikiDouble+459.67);
-                    rom=BigDecimal.valueOf(((wynikiDouble-32)*0.29167)+7.50);
-                    newton=BigDecimal.valueOf((wynikiDouble-32)*0.18333);
-
-                    textView.setText("Stopnie Celsjusza: "+cel.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nStopnie Farenheita: "+faren.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKelwiny: "+kel.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Delisle'a: "+del.setScale(2, RoundingMode.HALF_UP)+
-                            "\nStopnie Réaumura: "+rea.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Rankine'a: "+ran.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Romera: "+rom.setScale(3, RoundingMode.HALF_UP)+
-                            "\nNewtony: "+newton.setScale(8, RoundingMode.HALF_UP));
+                    double result =32+9/5d*cyfra_wyjscie;
+                    textView.setText("Result " + result);
                 }
-                else if (radioId==R.id.kel)
+                else if(From.equals("Celsjusz")&&To.equals("Kelwin"))
                 {
-                    cel=BigDecimal.valueOf(wynikiDouble-273.15);
-                    faren=BigDecimal.valueOf(wynikiDouble*5/9d-459.67);
-                    kel=BigDecimal.valueOf(wynikiDouble);
-                    del=BigDecimal.valueOf((373.15-wynikiDouble)*3/2d);
-                    rea=BigDecimal.valueOf((wynikiDouble - 273.15) * 4/5);
-                    ran=BigDecimal.valueOf(wynikiDouble*9/5d);
-                    rom=BigDecimal.valueOf(((wynikiDouble - 273.15) * 0.525) + 7.5);
-                    newton=BigDecimal.valueOf((wynikiDouble - 273.15) * 33/100);
-
-                    textView.setText("Stopnie Celsjusza: "+cel.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nStopnie Farenheita: "+faren.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKelwiny: "+kel.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Delisle'a: "+del.setScale(2, RoundingMode.HALF_UP)+
-                            "\nStopnie Réaumura: "+rea.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Rankine'a: "+ran.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Romera: "+rom.setScale(3, RoundingMode.HALF_UP)+
-                            "\nNewtony: "+newton.setScale(8, RoundingMode.HALF_UP));
+                    double result =cyfra_wyjscie+273.15;
+                    textView.setText("Result " + result);
                 }
-                else if (radioId==R.id.del)
+                else if(From.equals("Celsjusz")&&To.equals("Delisle"))
                 {
-                    cel=BigDecimal.valueOf(100 - wynikiDouble * 2/3);
-                    faren=BigDecimal.valueOf(212 - wynikiDouble * 6/5);
-                    kel=BigDecimal.valueOf(373.15 - wynikiDouble * 2/3);
-                    del=BigDecimal.valueOf(wynikiDouble);
-                    rea=BigDecimal.valueOf(80 - wynikiDouble * 8/15);
-                    ran=BigDecimal.valueOf(671.67 - wynikiDouble * 6/5);
-                    rom=BigDecimal.valueOf(60 - wynikiDouble * 7/20);
-                    newton=BigDecimal.valueOf(33 - wynikiDouble * 11/50);
-
-                    textView.setText("Stopnie Celsjusza: "+cel.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nStopnie Farenheita: "+faren.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKelwiny: "+kel.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Delisle'a: "+del.setScale(2, RoundingMode.HALF_UP)+
-                            "\nStopnie Réaumura: "+rea.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Rankine'a: "+ran.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Romera: "+rom.setScale(3, RoundingMode.HALF_UP)+
-                            "\nNewtony: "+newton.setScale(8, RoundingMode.HALF_UP));
+                    double result=150d-cyfra_wyjscie*1.5d;
+                    textView.setText("Result "+result);
                 }
-                else if (radioId==R.id.rea)
+                else if(From.equals("Celsjusz")&&To.equals("Réaumur"))
                 {
-                    cel=BigDecimal.valueOf(wynikiDouble * 5/4);
-                    faren=BigDecimal.valueOf(wynikiDouble * 9/4 + 32);
-                    kel=BigDecimal.valueOf(wynikiDouble * 5/4 + 273.15 );
-                    del=BigDecimal.valueOf((80 - wynikiDouble) * 15/8);
-                    rea=BigDecimal.valueOf(wynikiDouble);
-                    ran=BigDecimal.valueOf(wynikiDouble * 9/4 + 491.67);
-                    rom=BigDecimal.valueOf(wynikiDouble * 21/32 + 7.5);
-                    newton=BigDecimal.valueOf(wynikiDouble * 33/80);
-
-                    textView.setText("Stopnie Celsjusza: "+cel.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nStopnie Farenheita: "+faren.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKelwiny: "+kel.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Delisle'a: "+del.setScale(2, RoundingMode.HALF_UP)+
-                            "\nStopnie Réaumura: "+rea.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Rankine'a: "+ran.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Romera: "+rom.setScale(3, RoundingMode.HALF_UP)+
-                            "\nNewtony: "+newton.setScale(8, RoundingMode.HALF_UP));
+                    double result =cyfra_wyjscie*0.8d;
+                    textView.setText("Result " + result);
                 }
-                else if (radioId==R.id.ran)
+                else if(From.equals("Celsjusz")&&To.equals("Rankine"))
                 {
-                    cel=BigDecimal.valueOf((wynikiDouble - 491.67) * 5/9);
-                    faren=BigDecimal.valueOf(wynikiDouble- 459.67);
-                    kel=BigDecimal.valueOf(wynikiDouble*5/9 );
-                    del=BigDecimal.valueOf((671.67 - wynikiDouble) * 5/6);
-                    rea=BigDecimal.valueOf((wynikiDouble - 491.67) * 4/9);
-                    ran=BigDecimal.valueOf(wynikiDouble);
-                    rom=BigDecimal.valueOf((wynikiDouble - 491.67) * 7/24 + 7.5);
-                    newton=BigDecimal.valueOf((wynikiDouble - 491.67) * 11/60);
-
-                    textView.setText("Stopnie Celsjusza: "+cel.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nStopnie Farenheita: "+faren.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKelwiny: "+kel.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Delisle'a: "+del.setScale(2, RoundingMode.HALF_UP)+
-                            "\nStopnie Réaumura: "+rea.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Rankine'a: "+ran.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Romera: "+rom.setScale(3, RoundingMode.HALF_UP)+
-                            "\nNewtony: "+newton.setScale(8, RoundingMode.HALF_UP));
+                    double result =cyfra_wyjscie*1.8+491.67;
+                    textView.setText("Result " + result);
                 }
-                else if (radioId==R.id.rom)
+                else if(From.equals("Celsjusz")&&To.equals("Romer"))
                 {
-                    cel=BigDecimal.valueOf((wynikiDouble - 7.5) * 40/21);
-                    faren=BigDecimal.valueOf((wynikiDouble - 7.5) * 24/7 + 32);
-                    kel=BigDecimal.valueOf((wynikiDouble - 7.5) * 40/21 + 273.15 );
-                    del=BigDecimal.valueOf((60 - wynikiDouble) * 20/7);
-                    rea=BigDecimal.valueOf((wynikiDouble - 7.5) * 32/21);
-                    ran=BigDecimal.valueOf((wynikiDouble + 7.5) * 24/ 7 + 491.67);
-                    rom=BigDecimal.valueOf(wynikiDouble);
-                    newton=BigDecimal.valueOf((wynikiDouble - 7.5) * 22/35);
-
-                    textView.setText("Stopnie Celsjusza: "+cel.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nStopnie Farenheita: "+faren.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKelwiny: "+kel.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Delisle'a: "+del.setScale(2, RoundingMode.HALF_UP)+
-                            "\nStopnie Réaumura: "+rea.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Rankine'a: "+ran.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Romera: "+rom.setScale(3, RoundingMode.HALF_UP)+
-                            "\nNewtony: "+newton.setScale(8, RoundingMode.HALF_UP));
+                    double result =cyfra_wyjscie*21d/40d+7.5;
+                    textView.setText("Result " + result);
                 }
-                else if (radioId==R.id.newton)
+                else if(From.equals("Celsjusz")&&To.equals("Newton"))
                 {
-                    cel=BigDecimal.valueOf(wynikiDouble*100/33);
-                    faren=BigDecimal.valueOf(wynikiDouble * 60/11 + 32);
-                    kel=BigDecimal.valueOf(wynikiDouble * 100/33 + 273.15 );
-                    del=BigDecimal.valueOf((33 - wynikiDouble) * 50/11);
-                    rea=BigDecimal.valueOf(wynikiDouble * 80/33);
-                    ran=BigDecimal.valueOf(wynikiDouble * 60/11 + 491.67);
-                    rom=BigDecimal.valueOf(wynikiDouble * 35/22 + 7.5);
-                    newton=BigDecimal.valueOf(wynikiDouble );
+                    double result =cyfra_wyjscie*0.33d;
+                    textView.setText("Result " + result);
+                }
+                ///// Faren \/
 
-                    textView.setText("Stopnie Celsjusza: "+cel.setScale(3, RoundingMode.HALF_DOWN)+
-                            "\nStopnie Farenheita: "+faren.setScale(3, RoundingMode.HALF_UP)+
-                            "\nKelwiny: "+kel.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Delisle'a: "+del.setScale(2, RoundingMode.HALF_UP)+
-                            "\nStopnie Réaumura: "+rea.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Rankine'a: "+ran.setScale(3, RoundingMode.HALF_UP)+
-                            "\nStopnie Romera: "+rom.setScale(3, RoundingMode.HALF_UP)+
-                            "\nNewtony: "+newton.setScale(8, RoundingMode.HALF_UP));
+                if(From.equals("Farenheit")&&To.equals("Celsjusz"))
+                {
+                    double result=5/9d*(cyfra_wyjscie-32);
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Farenheit")&&To.equals("Farenheit"))
+                {
+                    double result =cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Farenheit")&&To.equals("Kelwin"))
+                {
+                    double result =(cyfra_wyjscie+459.67)*5/9;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Farenheit")&&To.equals("Delisle"))
+                {
+                    double result=(212-cyfra_wyjscie)*5/6;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Farenheit")&&To.equals("Réaumur"))
+                {
+                    double result =(cyfra_wyjscie-32)*0.44444;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Farenheit")&&To.equals("Rankine"))
+                {
+                    double result =cyfra_wyjscie+459.67;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Farenheit")&&To.equals("Romer"))
+                {
+                    double result =((cyfra_wyjscie-32)*0.29167)+7.50;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Farenheit")&&To.equals("Newton"))
+                {
+                    double result =(cyfra_wyjscie-32)*0.18333;
+                    textView.setText("Result " + result);
+                }
+
+                ////////Kel
+
+                if(From.equals("Kelwin")&&To.equals("Celsjusz"))
+                {
+                    double result=cyfra_wyjscie-273.15;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Kelwin")&&To.equals("Farenheit"))
+                {
+                    double result =cyfra_wyjscie*5/9d-459.67;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Kelwin")&&To.equals("Kelwin"))
+                {
+                    double result =cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Kelwin")&&To.equals("Delisle"))
+                {
+                    double result=(373.15-cyfra_wyjscie)*3/2d;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Kelwin")&&To.equals("Réaumur"))
+                {
+                    double result =(cyfra_wyjscie - 273.15) * 4/5;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Kelwin")&&To.equals("Rankine"))
+                {
+                    double result =cyfra_wyjscie*9/5d;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Kelwin")&&To.equals("Romer"))
+                {
+                    double result =((cyfra_wyjscie- 273.15) * 0.525) + 7.5;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Kelwin")&&To.equals("Newton"))
+                {
+                    double result =(cyfra_wyjscie-273.15) * 33/100;
+                    textView.setText("Result " + result);
+                }
+
+                // del
+
+                if(From.equals("Delisle")&&To.equals("Celsjusz"))
+                {
+                    double result=100 - cyfra_wyjscie * 2/3;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Delisle")&&To.equals("Farenheit"))
+                {
+                    double result =212 -cyfra_wyjscie * 6/5;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Delisle")&&To.equals("Kelwin"))
+                {
+                    double result =373.15 -cyfra_wyjscie * 2/3;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Delisle")&&To.equals("Delisle"))
+                {
+                    double result=cyfra_wyjscie;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Delisle")&&To.equals("Réaumur"))
+                {
+                    double result =80 - cyfra_wyjscie * 8/15;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Delisle")&&To.equals("Rankine"))
+                {
+                    double result =671.67 - cyfra_wyjscie * 6/5;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Delisle")&&To.equals("Romer"))
+                {
+                    double result =60 - cyfra_wyjscie * 7/20;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Delisle")&&To.equals("Newton"))
+                {
+                    double result =33 - cyfra_wyjscie * 11/50;
+                    textView.setText("Result " + result);
+                }
+                /////rea
+
+                if(From.equals("Réaumur")&&To.equals("Celsjusz"))
+                {
+                    double result=100 - cyfra_wyjscie * 5/4;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Réaumur")&&To.equals("Farenheit"))
+                {
+                    double result =cyfra_wyjscie * 9/4 + 32;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Réaumur")&&To.equals("Kelwin"))
+                {
+                    double result =cyfra_wyjscie * 5/4 + 273.15;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Réaumur")&&To.equals("Delisle"))
+                {
+                    double result=(80 - cyfra_wyjscie) * 15/8;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Réaumur")&&To.equals("Réaumur"))
+                {
+                    double result =cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Réaumur")&&To.equals("Rankine"))
+                {
+                    double result =cyfra_wyjscie * 9/4 + 491.67;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Réaumur")&&To.equals("Romer"))
+                {
+                    double result =cyfra_wyjscie * 21/32 + 7.5;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Réaumur")&&To.equals("Newton"))
+                {
+                    double result =cyfra_wyjscie * 33/80;
+                    textView.setText("Result " + result);
+                }
+
+                /// ran
+
+                if(From.equals("Rankine")&&To.equals("Celsjusz"))
+                {
+                    double result=(cyfra_wyjscie - 491.67) * 5/9;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Rankine")&&To.equals("Farenheit"))
+                {
+                    double result =cyfra_wyjscie - 459.67;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Rankine")&&To.equals("Kelwin"))
+                {
+                    double result =cyfra_wyjscie*5/9;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Rankine")&&To.equals("Delisle"))
+                {
+                    double result=(671.67 - cyfra_wyjscie) * 5/6;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Rankine")&&To.equals("Réaumur"))
+                {
+                    double result =(cyfra_wyjscie - 491.67) * 4/9;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Rankine")&&To.equals("Rankine"))
+                {
+                    double result =cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Rankine")&&To.equals("Romer"))
+                {
+                    double result =(cyfra_wyjscie - 491.67) * 7/24 + 7.5;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Rankine")&&To.equals("Newton"))
+                {
+                    double result =(cyfra_wyjscie - 491.67) * 11/60;
+                    textView.setText("Result " + result);
+                }
+
+                //rom
+
+
+                if(From.equals("Romera")&&To.equals("Celsjusz"))
+                {
+                    double result=((cyfra_wyjscie - 7.5) * 40/21);
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Romer")&&To.equals("Farenheit"))
+                {
+                    double result =(cyfra_wyjscie - 7.5) * 24/7 + 32;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Romer")&&To.equals("Kelwin"))
+                {
+                    double result =(cyfra_wyjscie - 7.5) * 40/21 + 273.15 ;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Romer")&&To.equals("Delisle"))
+                {
+                    double result=(60 - cyfra_wyjscie) * 20/7;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Romer")&&To.equals("Réaumur"))
+                {
+                    double result =(cyfra_wyjscie - 7.5) * 32/21;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Romer")&&To.equals("Rankine"))
+                {
+                    double result =(cyfra_wyjscie + 7.5) * 24/ 7 + 491.67;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Romer")&&To.equals("Romer"))
+                {
+                    double result =cyfra_wyjscie;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Romer")&&To.equals("Newton"))
+                {
+                    double result =(cyfra_wyjscie - 7.5) * 22/35;
+                    textView.setText("Result " + result);
+                }
+
+                // newton
+
+                if(From.equals("Newton")&&To.equals("Celsjusz"))
+                {
+                    double result=cyfra_wyjscie *100/33;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Newton")&&To.equals("Farenheit"))
+                {
+                    double result =cyfra_wyjscie  * 60/11 + 32;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Newton")&&To.equals("Kelwin"))
+                {
+                    double result =cyfra_wyjscie  * 100/33 + 273.15;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Newton")&&To.equals("Delisle"))
+                {
+                    double result=(33 - cyfra_wyjscie) * 50/11;
+                    textView.setText("Result "+result);
+                }
+                else if(From.equals("Newton")&&To.equals("Réaumur"))
+                {
+                    double result =cyfra_wyjscie * 80/33;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Newton")&&To.equals("Rankine"))
+                {
+                    double result =cyfra_wyjscie * 60/11 + 491.67;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Newton")&&To.equals("Romer"))
+                {
+                    double result =cyfra_wyjscie * 35/22 + 7.5;
+                    textView.setText("Result " + result);
+                }
+                else if(From.equals("Newton")&&To.equals("Newton"))
+                {
+                    double result =cyfra_wyjscie;
+                    textView.setText("Result " + result);
                 }
             }
         });
-    }
-
-    public void checkButton(View v)
-    {
-        int radioId = radioGroup.getCheckedRadioButtonId();
-        radioButton = findViewById(radioId);
     }
 }

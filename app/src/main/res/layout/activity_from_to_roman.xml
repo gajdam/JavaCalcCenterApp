@@ -7,12 +7,12 @@
     tools:context=".FromToRomanActivity">
 
     <Button
-        android:id="@+id/roman_submit"
+        android:id="@+id/toRoman_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="108dp"
-        android:text="Button"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="104dp"
+        android:text="submit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_from" />
 
@@ -28,20 +28,6 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="116dp" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="130dp"
-        android:text="Switch"
-        android:textOff="From"
-        android:textOn="To"
-        app:layout_constraintBottom_toTopOf="@+id/txt_from"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.865" />
-
     <TextView
         android:id="@+id/poka"
         android:layout_width="wrap_content"
@@ -51,5 +37,15 @@
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_from" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="60dp"
+        android:text="Switch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toRoman_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

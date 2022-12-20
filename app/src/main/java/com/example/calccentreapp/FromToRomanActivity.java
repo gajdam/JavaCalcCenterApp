@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 public class FromToRomanActivity extends AppCompatActivity {
 
     private static final int[] values = {
@@ -24,6 +26,17 @@ public class FromToRomanActivity extends AppCompatActivity {
             "X", "IX", "V", "IV",
             "I"
     };
+    private static HashMap<Character, Integer> map = new HashMap<>();
+
+    static {
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,25 +45,29 @@ public class FromToRomanActivity extends AppCompatActivity {
 
         final EditText input = findViewById(R.id.txt_from);
         final TextView output = findViewById(R.id.poka);
-        Button convertButton = findViewById(R.id.roman_submit);
-        Switch choice = (Switch) findViewById(R.id.switch1);
+        Button toButton = findViewById(R.id.toRoman_btn);
+        Switch choice = findViewById(R.id.switch1);
 
-        convertButton.setOnClickListener(new View.OnClickListener() {
+        toButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputString = input.getText().toString();
 
-                int inputInt = Integer.parseInt(inputString);
-                String outputString = toRoman(inputInt);
-                int outputSec = fromRoman(inputString);
                 if (!choice.isChecked()) {
+                    String inputString = input.getText().toString();
+                    int inputInt = Integer.parseInt(inputString);
+                    String outputString = toRoman(inputInt);
                     output.setText(outputString);
                 }
-                //TODO nie działa
-//                if (choice.isChecked()) {
-//                    output.setText(outputSec);
-//                }
-               // output.setText(String.valueOf(outputSec));
+                else {
+                    String inputString = input.getText().toString();
+                    int outputInt = fromRoman(inputString);
+                    output.setText(String.valueOf(outputInt));
+                }
+
+
+
+
+
             }
         });
     }
@@ -68,10 +85,18 @@ public class FromToRomanActivity extends AppCompatActivity {
     //TODO gdzieś tu jest problem, ale jeszcze nie wiem gdzie
     public static int fromRoman(String roman) {
         int result = 0;
-        for (int i = 0; i < symbols.length; i++) {
-            while (roman.startsWith(symbols[i])) {
-                result += values[i];
-                roman = roman.substring(symbols[i].length());
+        for (int i = 0; i < roman.length(); i++) {
+            int current = map.get(roman.charAt(i));
+            if (i + 1 < roman.length()) {
+                int next = map.get(roman.charAt(i + 1));
+                if (current >= next) {
+                    result += current;
+                } else {
+                    result += next - current;
+                    i++;
+                }
+            } else {
+                result += current;
             }
         }
         return result;

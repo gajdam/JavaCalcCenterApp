@@ -13,9 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CalcCentreApp"
         tools:targetApi="31">
-        <activity
-            android:name=".FromToRomanActivity"
-            android:exported="false" />
+        
         <activity
             android:name=".CalculatorActivity"
             android:exported="false"

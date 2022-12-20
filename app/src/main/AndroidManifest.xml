@@ -36,6 +36,16 @@
             android:label="@string/title_activity_tempconverter"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".Numeric_Systems"
+            android:exported="false"
+            android:label="@string/title_numeric_systems"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FromToRomanActivity"
+            android:exported="false"
+            android:label="@string/title_fromto_roman"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".ConverterActivity"
             android:exported="false"
             android:label="@string/title_activity_converter"

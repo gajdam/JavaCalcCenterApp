@@ -30,9 +30,19 @@
             android:onClick="launchTempConverter"
             android:title="TempConverter"/>
         <item
+            android:id="@+id/launchEnergyConverter"
+            android:icon="@drawable/ic_bolt"
+            android:onClick="launchEnergyConverter"
+            android:title="EnergyConverter"/>
+        <item
+            android:id="@+id/numeric_systems"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:onClick="launchNumericSystems"
+            android:title="Numeric Systems" />
+        <item
             android:id="@+id/settings"
             android:icon="@drawable/ic_baseline_settings_24"
             android:onClick="launchSettings"
-            android:title="Setting" />
+            android:title="Settings" />
     </group>
 </menu>

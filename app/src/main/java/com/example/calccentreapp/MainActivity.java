@@ -93,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
     public void launchTempConverter(MenuItem item) {
         Intent intent = new Intent(this, TempConverterActivity.class);
         startActivity(intent);
+
+    }
+    public void launchNumericSystems(MenuItem item) {
+        Intent intent = new Intent(this, Numeric_Systems.class);
+        startActivity(intent);
     }
     public void launchCalculator(MenuItem item) {
         Intent intent = new Intent(this, CalculatorActivity.class);

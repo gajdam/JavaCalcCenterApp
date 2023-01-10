@@ -7,14 +7,20 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.preference.PreferenceManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -67,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String setting = "Welcome " + prefs.getString("user_name", "");
         Toast.makeText(this, setting, Toast.LENGTH_LONG).show();
@@ -105,6 +113,15 @@ public class MainActivity extends AppCompatActivity {
     }
     public void launchCalculator(MenuItem item) {
         Intent intent = new Intent(this, CalculatorActivity.class);
+        startActivity(intent);
+    }
+    public void launchWeight(MenuItem item) {
+        Intent intent = new Intent(this, WeightActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchTimeDilation(MenuItem item) {
+        Intent intent = new Intent(this, Activity_Time_dilation.class);
         startActivity(intent);
     }
     public void launchEnergyConverter(MenuItem item) {

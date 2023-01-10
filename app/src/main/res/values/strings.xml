@@ -37,4 +37,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_numeric_systems">Numeric Systems</string>
     <string name="title_fromto_roman">Roman</string>
+    <string name="of_light_speed">% of light speed</string>
+    <string name="apply">Apply</string>
+    <string name="textview">TextView</string>
+    <string name="weeks">Weeks</string>
 </resources>

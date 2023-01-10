@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -37,7 +36,7 @@ public class Numeric_Systems extends AppCompatActivity {
                 int number;
                 switch (radioId2)
                 {
-                    case R.id.decimal2:
+                    case R.id.gram2:
                         switch(radioId)
                         {
                             case R.id.binary:
@@ -56,7 +55,7 @@ public class Numeric_Systems extends AppCompatActivity {
                                 break;
                         }
                         break;
-                    case R.id.binary2:
+                    case R.id.kilogram2:
                         switch (radioId)
                         {
                             case R.id.decimal:
@@ -81,7 +80,7 @@ public class Numeric_Systems extends AppCompatActivity {
                                 break;
                         }
                         break;
-                    case R.id.octal2:
+                    case R.id.tona2:
                         switch(radioId)
                         {
                             case R.id.decimal:
@@ -109,7 +108,7 @@ public class Numeric_Systems extends AppCompatActivity {
                                 break;
                         }
                         break;
-                    case R.id.hexdecimal2:
+                    case R.id.uncja2:
                         switch(radioId)
                         {
                             case R.id.decimal:
